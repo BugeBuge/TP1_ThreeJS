@@ -4,7 +4,11 @@ import {
   PerspectiveCamera,
   WebGLRenderer,
   Mesh,
+  AnimationMixer,
+  Object3D,
+  Clock,
 } from 'three';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 
 /**
  * An example constaints its own scene and camera.
@@ -47,6 +51,12 @@ export class Example {
   public _speed = {sun:0.01, earth:0.01, mars:0.01}
 
   public _Moon: Mesh;
+
+  public _mixer: AnimationMixer;
+
+  public _clock: Clock;
+
+  public _composer: EffectComposer;
   /**
    * GUI of this example. Please have a look at what dat.gui
    * is and how to use it. It's really useful to create quickly
@@ -71,6 +81,10 @@ export class Example {
     this._earth = new Mesh;
     this._Mars = new Mesh;
     this._Moon = new Mesh;
+    this._mixer = new AnimationMixer(new Object3D);
+    this._clock = new Clock();
+    this._composer = new EffectComposer(this._renderer);
+
 
     this._name = '';
   }
